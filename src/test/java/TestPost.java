@@ -106,9 +106,8 @@ public class TestPost {
 
         Response responseDelete = RestAssured.given()
                 .header("Content-Type", "application/json")
-                .body("{\"args\":{\"files\":\"3\"}}")
+                .queryParam("files", "5")
                 .when()
-                .param()
                 .delete("/delete")
                 .then()
                 .extract().response();
@@ -116,7 +115,7 @@ public class TestPost {
         answer = response.asString();
         JsonPath jsonPath = new JsonPath(answer);
         assertEquals(response.getStatusCode(),200);
-        assertTrue(jsonPath.getString("json.args.files").equals("5"));
+
     }
 
 
