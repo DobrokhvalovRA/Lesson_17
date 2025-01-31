@@ -67,6 +67,57 @@ public class TestPost {
         assertTrue(jsonPath.getString("json.args.files").equals("5"));
     }
 
+    @Test
+    public void testPut() {
+        String answer;
+        RestAssured.baseURI = "https://postman-echo.com";
+        Response response = RestAssured.given()
+                .header("Content-Type", "application/json")
+                .body("{\"args\":{\"files\":\"5\"}}")
+                .when()
+                .post("/post")
+                .then()
+                .extract().response();
+
+        Response responsePut = RestAssured.given()
+                .header("Content-Type", "application/json")
+                .body("{\"args\":{\"files\":\"3\"}}")
+                .when()
+                .put("/put")
+                .then()
+                .extract().response();
+
+        answer = responsePut.asString();
+        JsonPath jsonPath = new JsonPath(answer);
+        assertEquals(response.getStatusCode(),200);
+        assertTrue(jsonPath.getString("json.args.files").equals("3"));
+    }
+    @Test
+    public void testDelete() {
+        String answer;
+        RestAssured.baseURI = "https://postman-echo.com";
+        Response response = RestAssured.given()
+                .header("Content-Type", "application/json")
+                .body("{\"args\":{\"files\":\"5\"}}")
+                .when()
+                .post("/post")
+                .then()
+                .extract().response();
+
+        Response responseDelete = RestAssured.given()
+                .header("Content-Type", "application/json")
+                .body("{\"args\":{\"files\":\"3\"}}")
+                .when()
+                .param()
+                .delete("/delete")
+                .then()
+                .extract().response();
+
+        answer = response.asString();
+        JsonPath jsonPath = new JsonPath(answer);
+        assertEquals(response.getStatusCode(),200);
+        assertTrue(jsonPath.getString("json.args.files").equals("5"));
+    }
 
 
 
