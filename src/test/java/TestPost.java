@@ -1,7 +1,9 @@
+import io.qameta.allure.Allure;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import junit.framework.TestListener;
 import org.apache.commons.lang3.ObjectUtils;
 import org.junit.Test;
 
@@ -9,14 +11,20 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import io.qameta.allure.Step;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import org.junit.jupiter.api.DisplayName;
+
 
 public class TestPost {
 
 
     @Test
+    @DisplayName("Get")
     public void testGet() {
        String answer;
-        RestAssured.baseURI = "https://postman-echo.com/";
+       RestAssured.baseURI = "https://postman-echo.com/";
         Response response = given()
                 .param("foo1", "bar1")
                 .param("foo2", "bar2")
@@ -49,7 +57,9 @@ public class TestPost {
 
     }
 
+
     @Test
+    @DisplayName("Post")
     public void testPost() {
         String answer;
         RestAssured.baseURI = "https://postman-echo.com";
@@ -68,6 +78,7 @@ public class TestPost {
     }
 
     @Test
+    @DisplayName("Put")
     public void testPut() {
         String answer;
         RestAssured.baseURI = "https://postman-echo.com";
@@ -93,6 +104,7 @@ public class TestPost {
         assertTrue(jsonPath.getString("json.args.files").equals("3"));
     }
     @Test
+    @DisplayName("Delete")
     public void testDelete() {
         String answer;
         RestAssured.baseURI = "https://postman-echo.com";
