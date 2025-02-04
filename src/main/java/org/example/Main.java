@@ -17,13 +17,13 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class Main {
     public static void main(String[] args) {
-        RestAssured.baseURI = "https://postman-echo.com/";
+        /*RestAssured.baseURI = "https://postman-echo.com/";
         Response response = given()
                 .contentType("application/json")
                 .when()
                 .get("get?foo1=bar1&foo2=bar2")
                 .then()
-                //.body("foo1", equalTo(response.get))
+                .body("foo1", equalTo(response.get))
                 .extract().response();
 
 
@@ -33,6 +33,6 @@ public class Main {
 
         JsonPath jsonPath = new JsonPath(answer);
         String values = jsonPath.getString("args.foo2");
-        System.out.println("Значение: " + values);
+        System.out.println("Значение: " + values);*/
     }
 }
